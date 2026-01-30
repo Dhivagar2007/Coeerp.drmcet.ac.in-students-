@@ -4,6 +4,11 @@ const LoginPage = ({ onLoginSuccess }) => {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
   const [captchaInput, setCaptchaInput] = useState('');
+  // Use 'p0sTn9' as the default captcha to match the visual, 
+  // but keep the generator capability for functionality if needed. 
+  // For exact clone visual we start with a static one, or we can random it.
+  // The provided HTML has "VZCGfX" and "p0sTn9" in different places, 
+  // I will use a random one to be functional but style it effectively.
   const [generatedCaptcha, setGeneratedCaptcha] = useState('');
 
   useEffect(() => {
@@ -11,6 +16,7 @@ const LoginPage = ({ onLoginSuccess }) => {
   }, []);
 
   const generateCaptcha = () => {
+    // Logic to mimic the random string generation
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     let captcha = '';
     for (let i = 0; i < 6; i++) {
@@ -19,7 +25,9 @@ const LoginPage = ({ onLoginSuccess }) => {
     setGeneratedCaptcha(captcha);
   };
 
-  const chkLogin = () => {
+  const chkLogin = (e) => {
+    e.preventDefault(); // Prevent default form submission
+
     if (!loginId) {
       alert('Please enter usename');
       document.getElementById('txtLoginId').focus();
@@ -37,29 +45,28 @@ const LoginPage = ({ onLoginSuccess }) => {
     }
 
     if (captchaInput !== generatedCaptcha) {
-      alert('Please valid captcha');
+      alert('Please valid captcha'); // Exact text from target JS
       setCaptchaInput('');
       document.getElementById('txtCaptcha').focus();
       return;
     }
 
-    // Mock Authentication Logic
+    // Mock Authentication Logic mimicking the AJAX success/failure
+    // In the real script it calls chklogin.php
     const normalUser = loginId.trim().toUpperCase();
     const normalPass = password.trim();
 
-    if (normalUser === '727624BSC046' && normalPass === '30-04-2007') {
+    // Hardcoded mock credentials for demo
+    if ((normalUser === '727624BSC046' && normalPass === '30-04-2007') ||
+      (normalUser === '727624BSC011' && normalPass === '25-06-2007')) {
+      // Simulate "SUCCESS" response
       onLoginSuccess({
-        name: 'NAVEEN P',
-        roll: '727624BSC046',
-        photo: 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110805?v=0.9530980101260992'
-      });
-    } else if (normalUser === '727624BSC011' && normalPass === '25-06-2007') {
-      onLoginSuccess({
-        name: 'DHANUSH S',
-        roll: '727624BSC011',
-        photo: 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949'
+        name: normalUser === '727624BSC046' ? 'NAVEEN P' : 'DHANUSH S',
+        roll: normalUser,
+        photo: '' // Placeholder
       });
     } else {
+      // Simulate failure response
       alert('Invalid Login ID or Password. Please retry...');
       generateCaptcha();
       setPassword('');
@@ -68,66 +75,92 @@ const LoginPage = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-overlay"></div>
+    <div className="bg-wrap">
+      <div className="content" style={{ padding: '10px' }}>
+        <div
+          style={{
+            position: 'absolute',
+            backgroundColor: 'transparent',
+            backgroundImage: "url('images/entity/entitylogo.jpg')", // Placeholder path
+            backgroundSize: '200px 100px',
+            backgroundRepeat: 'no-repeat',
+            border: '1px solid white',
+            borderRadius: '10px',
+            width: '200px',
+            height: '100px',
+            display: 'block',
+            marginLeft: '100px',
+            marginTop: '-50px',
+            paddingRight: '0px'
+          }}
+        ></div>
 
-      <div className="login-box noselect">
-        <div className="login-logo"></div>
+        <br /><br /><br /><br /><br /><br /><br /><br />
 
-        <div style={{ marginBottom: '15px' }}>
-          <label>Login ID :</label>
+        <form onSubmit={chkLogin}>
+          Login ID :<br />
           <input
             type="text"
             id="txtLoginId"
-            className="login-field"
             maxLength="20"
             placeholder="Your Reg. Number"
+            style={{ fontSize: '1em' }}
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
-          />
-        </div>
+          /><br /><br />
 
-        <div style={{ marginBottom: '15px' }}>
-          <label>Password :</label>
+          Password :<br />
           <input
             type="password"
             id="txtPassword"
-            className="login-field"
             placeholder="dd-mm-yyyy"
             maxLength="20"
+            style={{ fontSize: '1em' }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          /><br /><br />
 
-        <div
-          className="captcha-display"
-          onClick={generateCaptcha}
-          title="Click to refresh captcha"
-        >
-          {generatedCaptcha}
-        </div>
+          <div
+            className="noselect"
+            style={{
+              height: '2em',
+              lineHeight: '2em',
+              width: '60%',
+              margin: 'auto',
+              fontSize: '2em',
+              backgroundColor: 'brown',
+              color: 'white',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }}
+            onClick={generateCaptcha}
+            title="Click to refresh captcha"
+          >
+            {generatedCaptcha}
+          </div><br />
 
-        <div style={{ marginBottom: '15px' }}>
-          <label style={{ color: 'brown' }}>Enter Captcha :</label>
+          <span style={{ color: 'brown' }}>Enter Captcha :</span><br />
           <input
             type="text"
             id="txtCaptcha"
-            className="login-field"
             maxLength="6"
-            style={{ userSelect: 'all' }}
+            style={{ fontSize: '1em', userSelect: 'all' }}
             value={captchaInput}
             onChange={(e) => setCaptchaInput(e.target.value)}
           />
-        </div>
+          <br /><br />
 
-        <button className="login-btn" onClick={chkLogin}>
-          Submit
-        </button>
+          <input
+            type="submit"
+            value="Submit"
+            style={{ fontSize: '1em', width: '100px', height: '30px' }}
+          />
+        </form>
 
-        <div style={{ marginTop: '20px', fontSize: '0.8em', color: 'black' }}>
+        <br /><br />
+        <span className="noselect" style={{ fontSize: '0.8em', color: 'black' }}>
           Copyright © COXCO<br />All rights reserved.
-        </div>
+        </span>
       </div>
     </div>
   );
