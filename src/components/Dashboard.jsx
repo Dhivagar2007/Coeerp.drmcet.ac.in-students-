@@ -168,36 +168,41 @@ const Dashboard = ({ user, onLogout }) => {
     return (
         <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', background: '#fff' }}>
             {/* Header */}
-            <div style={{ backgroundColor: 'rgb(0,153,153)', height: '60px', width: '100%', display: 'block', margin: '0px', padding: '0px', position: 'absolute', top: 0, left: 0 }}>
-                <div style={{ float: 'left', border: '1px solid white', borderRadius: '10px', marginTop: '5px', backgroundColor: 'white', marginLeft: '5px' }}>
-                    <img src="images/entity/entitylogo.jpg" style={{ width: '120px', height: '60px', padding: '5px' }} alt="Logo" />
+            <div style={{ backgroundColor: 'rgb(0,153,153)', height: '60px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 5px', position: 'absolute', top: 0, left: 0, overflow: 'hidden' }}>
+                {/* Logo */}
+                <div style={{ border: '1px solid white', borderRadius: '10px', backgroundColor: 'white', flexShrink: 0 }}>
+                    <img src="images/entity/entitylogo.jpg" style={{ width: '80px', height: '40px', padding: '2px', objectFit: 'contain' }} alt="Logo" />
                 </div>
-                <div style={{ float: 'left', fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', fontSize: '1.5em', color: 'white', paddingLeft: '40px' }}>
-                    Dr. Mahalingam College of Engineering and Technology (Autonomous) <br />
-                    <div style={{ float: 'left', fontFamily: 'inherit', fontSize: '0.6em', color: 'white' }}>
-                        (An Autonomous Institution, Affiliated to Anna University, Chennai.)<br />Approved by AICTE, Accredited by NAAC with `A++` Grade
+
+                {/* College Title */}
+                <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '5px', overflow: 'hidden' }}>
+                    <div style={{ fontSize: browserDims.width < 768 ? '0.65em' : '1.2em', fontWeight: 'bold', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                        Dr. Mahalingam College of Engineering and Technology
+                    </div>
+                    <div style={{ fontSize: browserDims.width < 768 ? '0.45em' : '0.6em', color: 'white', opacity: 0.9, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                        (An Autonomous Institution, Affiliated to Anna University, Chennai.) approved by AICTE
                     </div>
                 </div>
-                <div style={{ float: 'right', fontFamily: 'inherit', fontSize: '1.2em', color: 'white', padding: '5px', paddingRight: '5px', marginTop: '-5px', textAlign: 'right' }}>
-                    <table style={{ borderCollapse: 'collapse', lineHeight: '18px' }}>
-                        <tbody>
-                            <tr>
-                                <td rowSpan="2" style={{ padding: '0px', border: '0px' }}>
-                                    <img align="center"
-                                        src={
-                                            user?.roll === '727624BSC046' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110805?v=0.9530980101260992' :
-                                                user?.roll === '727624BSC011' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949' :
-                                                    "images/entity/entitylogo.jpg"
-                                        }
-                                        width="50px" height="50px" style={{ borderRadius: '25px', paddingTop: '5px', marginRight: '20px' }} alt="User"
-                                        onError={(e) => { e.target.onerror = null; e.target.src = "images/entity/entitylogo.jpg"; }}
-                                    />
-                                </td>
-                                <td>User : {studentName}<br />Roll No. : {rollNo}</td>
-                            </tr>
-                            <tr><td><a href="#" onClick={onLogout} style={{ color: 'white', fontSize: '0.8em', float: 'right', textDecoration: 'none' }}>LOGOUT</a></td></tr>
-                        </tbody>
-                    </table>
+
+                {/* Profile Section */}
+                <div style={{ flexShrink: 0, fontFamily: 'inherit', fontSize: browserDims.width < 768 ? '0.8em' : '1em', color: 'white', textAlign: 'right', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center', marginRight: '5px' }}>
+                        <span style={{ fontWeight: 'bold' }}>{studentName}</span>
+                        <span style={{ fontSize: '0.8em' }}>{rollNo}</span>
+                        <a href="#" onClick={onLogout} style={{ color: 'white', fontSize: '0.8em', textDecoration: 'underline', marginTop: '2px' }}>LOGOUT</a>
+                    </div>
+                    <img
+                        src={
+                            user?.roll === '727624BSC046' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110805?v=0.9530980101260992' :
+                                user?.roll === '727624BSC011' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949' :
+                                    "images/entity/entitylogo.jpg"
+                        }
+                        width={browserDims.width < 768 ? "35px" : "45px"}
+                        height={browserDims.width < 768 ? "35px" : "45px"}
+                        style={{ borderRadius: '50%', backgroundColor: 'white' }}
+                        alt="User"
+                        onError={(e) => { e.target.onerror = null; e.target.src = "images/entity/entitylogo.jpg"; }}
+                    />
                 </div>
             </div>
 
