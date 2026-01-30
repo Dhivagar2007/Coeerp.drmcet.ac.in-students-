@@ -21,7 +21,7 @@ const Dashboard = ({ user, onLogout }) => {
         fontFamily: '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif"',
         fontSize: '14px',
         width: '130px',
-        height: '30px',
+        height: '45px',
         marginLeft: '10px',
         backgroundColor: 'transparent',
         outline: 'none',
@@ -175,7 +175,7 @@ const Dashboard = ({ user, onLogout }) => {
                 </div>
 
                 {/* College Title */}
-                <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '10px', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '10px', overflow: 'hidden', whiteSpace: 'normal' }}>
                     <div style={{ fontSize: '1.2em', fontWeight: 'bold', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                         Dr. Mahalingam College of Engineering and Technology
                     </div>

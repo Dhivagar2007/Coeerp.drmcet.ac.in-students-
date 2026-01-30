@@ -76,7 +76,7 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   return (
     <div className="bg-wrap">
-      <div className="content" style={{ padding: '10px' }}>
+      <div className="content" style={{ padding: '10px', position: 'relative' }}>
         <div
           style={{
             position: 'absolute',
@@ -89,7 +89,8 @@ const LoginPage = ({ onLoginSuccess }) => {
             width: '200px',
             height: '100px',
             display: 'block',
-            marginLeft: '100px',
+            left: '50%',
+            transform: 'translateX(-50%)',
             marginTop: '-50px',
             paddingRight: '0px'
           }}
@@ -153,7 +154,7 @@ const LoginPage = ({ onLoginSuccess }) => {
           <input
             type="submit"
             value="Submit"
-            style={{ fontSize: '1em', width: '100px', height: '30px' }}
+            style={{ fontSize: '1em', width: '100px', height: '45px' }}
           />
         </form>
 
