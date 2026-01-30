@@ -203,20 +203,24 @@ const Dashboard = ({ user, onLogout }) => {
                 </div>
             </div>
 
-            {/* Sidebar (Left Menu) */}
-            <div id="divLeftMenu" style={{ float: 'left', width: '150px', height: `${browserDims.height - 60}px`, borderRadius: '0px 0px 10px', paddingTop: '120px', display: 'block', backgroundColor: 'rgb(0, 153, 153)', marginTop: '60px' }}>
-                <input type="button" value="Student's Profile" style={btnStyle} onClick={() => setCurrentView('profile')} />
-                <input type="button" value="Int. Assessments" style={btnStyle} disabled />
-                <input type="button" value="End Sem Results" style={btnStyle} onClick={() => setCurrentView('results')} />
-                <input type="button" value="Exam Registration" style={btnStyle} onClick={() => setCurrentView('examreg')} />
-                <input type="button" value="Open Elective Reg." style={btnStyle} disabled />
-            </div>
+            {/* Main Layout Container (Flexbox) */}
+            <div style={{ position: 'absolute', top: '60px', left: 0, right: 0, bottom: 0, display: 'flex', overflow: 'hidden' }}>
 
-            {/* Main Content Pane (Right) */}
-            <div id="divRightPane" style={{ float: 'left', width: `${browserDims.width - 152}px`, height: `${browserDims.height - 65}px`, paddingTop: '60px', display: 'block', backgroundColor: 'white', border: '0px solid blue', overflow: 'auto' }}>
-                {currentView === 'profile' && <ProfileView />}
-                {currentView === 'results' && <ResultsView />}
-                {currentView === 'examreg' && <ExamRegistrationView />}
+                {/* Sidebar (Left Menu) */}
+                <div id="divLeftMenu" style={{ width: '150px', backgroundColor: 'rgb(0, 153, 153)', display: 'flex', flexDirection: 'column', padding: '20px 0', alignItems: 'center' }}>
+                    <input type="button" value="Student's Profile" style={btnStyle} onClick={() => setCurrentView('profile')} />
+                    <input type="button" value="Int. Assessments" style={btnStyle} disabled />
+                    <input type="button" value="End Sem Results" style={btnStyle} onClick={() => setCurrentView('results')} />
+                    <input type="button" value="Exam Registration" style={btnStyle} onClick={() => setCurrentView('examreg')} />
+                    <input type="button" value="Open Elective Reg." style={btnStyle} disabled />
+                </div>
+
+                {/* Main Content Pane (Right) */}
+                <div id="divRightPane" style={{ flex: 1, backgroundColor: 'white', overflow: 'auto', position: 'relative' }}>
+                    {currentView === 'profile' && <ProfileView />}
+                    {currentView === 'results' && <ResultsView />}
+                    {currentView === 'examreg' && <ExamRegistrationView />}
+                </div>
             </div>
         </div>
     );
