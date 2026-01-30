@@ -175,13 +175,15 @@ const Dashboard = ({ user, onLogout }) => {
                 </div>
 
                 {/* College Title */}
-                <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '5px', overflow: 'hidden' }}>
-                    <div style={{ fontSize: browserDims.width < 768 ? '0.65em' : '1.2em', fontWeight: 'bold', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '10px', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontSize: browserDims.width < 768 ? '0.8em' : '1.2em', fontWeight: 'bold', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                         Dr. Mahalingam College of Engineering and Technology
                     </div>
-                    <div style={{ fontSize: browserDims.width < 768 ? '0.45em' : '0.6em', color: 'white', opacity: 0.9, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                        (An Autonomous Institution, Affiliated to Anna University, Chennai.) approved by AICTE
-                    </div>
+                    {browserDims.width >= 768 && (
+                        <div style={{ fontSize: '0.6em', color: 'white', opacity: 0.9 }}>
+                            (An Autonomous Institution, Affiliated to Anna University, Chennai.) approved by AICTE
+                        </div>
+                    )}
                 </div>
 
                 {/* Profile Section */}
