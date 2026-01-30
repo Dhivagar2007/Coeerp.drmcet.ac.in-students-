@@ -176,18 +176,16 @@ const Dashboard = ({ user, onLogout }) => {
 
                 {/* College Title */}
                 <div style={{ flex: 1, fontFamily: '"Lucida Grande", "Lucida Sans Unicode", sans-serif', color: 'white', paddingLeft: '10px', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                    <div style={{ fontSize: browserDims.width < 768 ? '0.8em' : '1.2em', fontWeight: 'bold', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                    <div style={{ fontSize: '1.2em', fontWeight: 'bold', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                         Dr. Mahalingam College of Engineering and Technology
                     </div>
-                    {browserDims.width >= 768 && (
-                        <div style={{ fontSize: '0.6em', color: 'white', opacity: 0.9 }}>
-                            (An Autonomous Institution, Affiliated to Anna University, Chennai.) approved by AICTE
-                        </div>
-                    )}
+                    <div style={{ fontSize: '0.6em', color: 'white', opacity: 0.9 }}>
+                        (An Autonomous Institution, Affiliated to Anna University, Chennai.) approved by AICTE
+                    </div>
                 </div>
 
                 {/* Profile Section */}
-                <div style={{ flexShrink: 0, fontFamily: 'inherit', fontSize: browserDims.width < 768 ? '0.8em' : '1em', color: 'white', textAlign: 'right', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ flexShrink: 0, fontFamily: 'inherit', fontSize: '1em', color: 'white', textAlign: 'right', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center', marginRight: '5px' }}>
                         <span style={{ fontWeight: 'bold' }}>{studentName}</span>
                         <span style={{ fontSize: '0.8em' }}>{rollNo}</span>
@@ -199,10 +197,7 @@ const Dashboard = ({ user, onLogout }) => {
                                 user?.roll === '727624BSC011' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949' :
                                     "images/entity/entitylogo.jpg"
                         }
-                        width={browserDims.width < 768 ? "35px" : "45px"}
-                        height={browserDims.width < 768 ? "35px" : "45px"}
-                        style={{ borderRadius: '50%', backgroundColor: 'white' }}
-                        alt="User"
+                        width="45px" height="45px" style={{ borderRadius: '50%', backgroundColor: 'white' }} alt="User"
                         onError={(e) => { e.target.onerror = null; e.target.src = "images/entity/entitylogo.jpg"; }}
                     />
                 </div>
