@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Dashboard = ({ user, onLogout }) => {
-    const [currentView, setCurrentView] = useState('profile');
+    const [currentView, setCurrentView] = useState('results');
     const [browserDims, setBrowserDims] = useState({ width: window.innerWidth, height: window.innerHeight });
 
     // Mock student data
@@ -49,59 +49,96 @@ const Dashboard = ({ user, onLogout }) => {
     );
 
     // 2. End Sem Results View (examresults.php) - Exact implementation from Block 2
-    const ResultsView = () => (
-        <div className="divqplistpan" style={{ width: '99%', height: '98%', marginTop: '5px', margin: '0.5%', display: 'block', border: '1px solid #ccc', borderRadius: '10px', overflow: 'auto' }}>
-            <div style={{ width: '80%', fontFamily: 'Tahoma, Geneva, sans-serif', display: 'block', border: '1px solid #ccc', marginTop: '10px', borderRadius: '10px', fontSize: '12px', fontWeight: 'normal', backgroundColor: '#ccc', textAlign: 'left', padding: '5px' }}>
-                <b>Disclaimer :</b> The college is not responsible for any inadvertent error that may have crept in the results being published on Net. The results published on Net are for immediate information to the students. These cannot be treated as original mark sheets.
-            </div>
+    const ResultsView = () => {
+        const renderCourseRow = (course, index) => (
+            <tr key={`${course.code}-${index}`} style={{ height: '25px', color: 'black' }}>
+                <td>{course.sem}</td>
+                <td>{course.part}</td>
+                <td>{course.code}</td>
+                <td align="left" style={{ width: '700px' }}>{course.name}</td>
+                <td>{course.credit}</td>
+                <td>{course.result}</td>
+                <td>{course.grade}</td>
+                <td>{course.gp}</td>
+            </tr>
+        );
 
-            <div id="divpane1" style={{ borderRadius: '5px', display: 'block', verticalAlign: 'center', lineHeight: '30px', marginTop: '10px', width: '80%', textAlign: 'center', fontSize: '16px', color: '#00F' }}>
-                <table className="tblBRDefault">
-                    <tbody>
-                        {/* Common Headers for both */}
-                        <tr style={{ height: '40px' }}>
-                            <th colSpan="8" style={{ backgroundColor: 'rgb(115,60,145)', color: 'white' }}>RESULTS OF THIRD SEMESTER : [2025 - ODD SEMESTER - END SEMESTER]</th>
-                        </tr>
-                        <tr style={{ height: '30px' }}>
-                            <th>Sem</th><th>Part</th><th>Course Code</th><th>Name of the Course</th><th>Credit</th><th>Result</th><th>GR.</th><th>G.P.</th>
-                        </tr>
+        const navinCourses = [
+            { sem: '1', part: '3', code: '23MAI103', name: 'LINEAR ALGEBRA AND INFINITE SERIES', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
+            { sem: '1', part: '3', code: '23CST101', name: 'PROBLEM SOLVING USING C', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '1', part: '3', code: '23EEI102', name: 'INTRODUCTION TO ELECTRICAL AND ELECTRONICS ENGINEERING', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
+            { sem: '2', part: '3', code: '23MAI203', name: 'CALCULUS AND TRANSFORMS', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '2', part: '3', code: '23ITT201', name: 'DATA STRUCTURES', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '2', part: '3', code: '23EEI201', name: 'DIGITAL SYSTEM DESIGN', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '3', part: '3', code: '23MAT305', name: 'DISCRETE MATHEMATICS', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
+            { sem: '3', part: '3', code: '23SCT301', name: 'COMPUTER ORGANIZATION AND ARCHITECTURE', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '3', part: '3', code: '23SCT302', name: 'PRINCIPLES OF COMMUNICATION AND CYBER ATTACKS', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '3', part: '3', code: '23SCI302', name: 'DATABASE DESIGN', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '3', part: '3', code: '23SCI301', name: 'OBJECT ORIENTED PROGRAMMING', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '3', part: '3', code: '23SCL301', name: 'PROGRAMMING USING PYTHON LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
+            { sem: '3', part: '3', code: '23VAT301', name: 'UNIVERSAL HUMAN VALUES 2: UNDERSTANDING HARMONY', credit: '3.00', result: 'PASS', grade: 'A+', gp: '9.00' },
+            { sem: '3', part: '3', code: '23ESL301', name: 'PROFESSIONAL SKILLS-2: PROBLEM SOLVING SKILLS & LOGICAL THINKING 2', credit: '1.00', result: 'PASS', grade: 'B+', gp: '7.00' }
+        ];
 
-                        {user?.roll === '727624BSC011' ? (
-                            /* Data Rows for DHANUSH S (727624BSC011) */
-                            <>
-                                <tr style={{ height: '25px', color: 'black' }}><td>1</td><td>3</td><td>23MAI103</td><td align="left" style={{ width: '700px' }}>LINEAR ALGEBRA AND INFINITE SERIES</td><td>4.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>1</td><td>3</td><td>23CST101</td><td align="left" style={{ width: '700px' }}>PROBLEM SOLVING USING C</td><td>3.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>1</td><td>3</td><td>23EEI102</td><td align="left" style={{ width: '700px' }}>INTRODUCTION TO ELECTRICAL AND ELECTRONICS ENGINEERING</td><td>4.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>2</td><td>3</td><td>23MAI203</td><td align="left" style={{ width: '700px' }}>CALCULUS AND TRANSFORMS</td><td>4.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>2</td><td>3</td><td>23ITT201</td><td align="left" style={{ width: '700px' }}>DATA STRUCTURES</td><td>3.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>2</td><td>3</td><td>23EEI201</td><td align="left" style={{ width: '700px' }}>DIGITAL SYSTEM DESIGN</td><td>3.00</td><td>RE-APPEAR</td><td>RA</td><td></td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23MAT305</td><td align="left" style={{ width: '700px' }}>DISCRETE MATHEMATICS</td><td>4.00</td><td>PASS</td><td>B</td><td>6.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCT301</td><td align="left" style={{ width: '700px' }}>COMPUTER ORGANIZATION AND ARCHITECTURE</td><td>3.00</td><td>PASS</td><td>A</td><td>8.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCT302</td><td align="left" style={{ width: '700px' }}>PRINCIPLES OF COMMUNICATION AND CYBER ATTACKS</td><td>3.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCI302</td><td align="left" style={{ width: '700px' }}>DATABASE DESIGN</td><td>4.00</td><td>PASS</td><td>A</td><td>8.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCI301</td><td align="left" style={{ width: '700px' }}>OBJECT ORIENTED PROGRAMMING</td><td>4.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCL301</td><td align="left" style={{ width: '700px' }}>PROGRAMMING USING PYTHON LABORATORY</td><td>2.00</td><td>PASS</td><td>O</td><td>10.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23VAT301</td><td align="left" style={{ width: '700px' }}>UNIVERSAL HUMAN VALUES 2: UNDERSTANDING HARMONY</td><td>3.00</td><td>PASS</td><td>A+</td><td>9.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23ESL301</td><td align="left" style={{ width: '700px' }}>PROFESSIONAL SKILLS-2: PROBLEM SOLVING SKILLS &amp; LOGICAL THINKING 2</td><td>1.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                            </>
-                        ) : (
-                            /* Data Rows for NAVEEN P (727624BSC046) - Default */
-                            <>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23MAT305</td><td align="left" style={{ width: '700px' }}>DISCRETE MATHEMATICS</td><td>4.00</td><td>PASS</td><td>B</td><td>6.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCT301</td><td align="left" style={{ width: '700px' }}>COMPUTER ORGANIZATION AND ARCHITECTURE</td><td>3.00</td><td>PASS</td><td>A</td><td>8.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCT302</td><td align="left" style={{ width: '700px' }}>PRINCIPLES OF COMMUNICATION AND CYBER ATTACKS</td><td>3.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCI302</td><td align="left" style={{ width: '700px' }}>DATABASE DESIGN</td><td>4.00</td><td>PASS</td><td>A</td><td>8.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCI301</td><td align="left" style={{ width: '700px' }}>OBJECT ORIENTED PROGRAMMING</td><td>4.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23SCL301</td><td align="left" style={{ width: '700px' }}>PROGRAMMING USING PYTHON LABORATORY</td><td>2.00</td><td>PASS</td><td>O</td><td>10.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23VAT301</td><td align="left" style={{ width: '700px' }}>UNIVERSAL HUMAN VALUES 2: UNDERSTANDING HARMONY</td><td>3.00</td><td>PASS</td><td>A+</td><td>9.00</td></tr>
-                                <tr style={{ height: '25px', color: 'black' }}><td>3</td><td>3</td><td>23ESL301</td><td align="left" style={{ width: '700px' }}>PROFESSIONAL SKILLS-2: PROBLEM SOLVING SKILLS &amp; LOGICAL THINKING 2</td><td>1.00</td><td>PASS</td><td>B+</td><td>7.00</td></tr>
-                            </>
-                        )}
-                    </tbody>
-                </table>
+        const naveenCourses = [
+            { sem: '3', part: '3', code: '23MAT305', name: 'DISCRETE MATHEMATICS', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
+            { sem: '3', part: '3', code: '23SCT301', name: 'COMPUTER ORGANIZATION AND ARCHITECTURE', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '3', part: '3', code: '23SCT302', name: 'PRINCIPLES OF COMMUNICATION AND CYBER ATTACKS', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '3', part: '3', code: '23SCI302', name: 'DATABASE DESIGN', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '3', part: '3', code: '23SCI301', name: 'OBJECT ORIENTED PROGRAMMING', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '3', part: '3', code: '23SCL301', name: 'PROGRAMMING USING PYTHON LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
+            { sem: '3', part: '3', code: '23VAT301', name: 'UNIVERSAL HUMAN VALUES 2: UNDERSTANDING HARMONY', credit: '3.00', result: 'PASS', grade: 'A+', gp: '9.00' },
+            { sem: '3', part: '3', code: '23ESL301', name: 'PROFESSIONAL SKILLS-2: PROBLEM SOLVING SKILLS & LOGICAL THINKING 2', credit: '1.00', result: 'PASS', grade: 'B+', gp: '7.00' }
+        ];
+
+        const bsc053Courses = [...naveenCourses];
+        const bsc031Courses = [...naveenCourses];
+
+        const bsc053Override = bsc053Courses.find(course => course.code === '23SCI301');
+        if (bsc053Override) {
+            bsc053Override.result = 'RE-APPEAR';
+            bsc053Override.grade = 'RA';
+            bsc053Override.gp = '';
+        }
+
+        const bsc031Override = bsc031Courses.find(course => course.code === '23SCT302');
+        if (bsc031Override) {
+            bsc031Override.result = 'RE-APPEAR';
+            bsc031Override.grade = 'RA';
+            bsc031Override.gp = '';
+        }
+
+        const rows = user?.roll === '727624BSC011'
+            ? navinCourses
+            : user?.roll === '727624BSC053'
+                ? bsc053Courses
+                : user?.roll === '727624BSC031'
+                    ? bsc031Courses
+                    : naveenCourses;
+
+        return (
+            <div className="divqplistpan" style={{ width: '99%', height: '98%', marginTop: '5px', margin: '0.5%', display: 'block', border: '1px solid #ccc', borderRadius: '10px', overflow: 'auto' }}>
+                <div style={{ width: '80%', fontFamily: 'Tahoma, Geneva, sans-serif', display: 'block', border: '1px solid #ccc', marginTop: '10px', borderRadius: '10px', fontSize: '12px', fontWeight: 'normal', backgroundColor: '#ccc', textAlign: 'left', padding: '5px' }}>
+                    <b>Disclaimer :</b> The college is not responsible for any inadvertent error that may have crept in the results being published on Net. The results published on Net are for immediate information to the students. These cannot be treated as original mark sheets.
+                </div>
+
+                <div id="divpane1" style={{ borderRadius: '5px', display: 'block', verticalAlign: 'center', lineHeight: '30px', marginTop: '10px', width: '80%', textAlign: 'center', fontSize: '16px', color: '#00F' }}>
+                    <table className="tblBRDefault">
+                        <tbody>
+                            {/* Common Headers for both */}
+                            <tr style={{ height: '40px' }}>
+                                <th colSpan="9" style={{ backgroundColor: 'rgb(115,60,145)', color: 'white' }}>RESULTS OF THIRD SEMESTER : [2025 - ODD SEMESTER - END SEMESTER]</th>
+                            </tr>
+                            <tr style={{ height: '30px' }}>
+                                <th>Sem</th><th>Part</th><th>Course Code</th><th>Name of the Course</th><th>Credit</th><th>Result</th><th>GR.</th><th>G.P.</th>
+                            </tr>
+                            {rows.map(renderCourseRow)}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    );
+        );
+    };
 
     // 3. Exam Registration (Fee Logic)
     const ExamRegistrationView = () => {
@@ -192,11 +229,7 @@ const Dashboard = ({ user, onLogout }) => {
                         <a href="#" onClick={onLogout} style={{ color: 'white', fontSize: '0.8em', textDecoration: 'underline', marginTop: '2px' }}>LOGOUT</a>
                     </div>
                     <img
-                        src={
-                            user?.roll === '727624BSC046' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110805?v=0.9530980101260992' :
-                                user?.roll === '727624BSC011' ? 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949' :
-                                    "images/entity/entitylogo.jpg"
-                        }
+                        src={user?.photo || "images/entity/entitylogo.jpg"}
                         width="45px" height="45px" style={{ borderRadius: '50%', backgroundColor: 'white' }} alt="User"
                         onError={(e) => { e.target.onerror = null; e.target.src = "images/entity/entitylogo.jpg"; }}
                     />

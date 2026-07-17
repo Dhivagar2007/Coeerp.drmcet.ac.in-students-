@@ -56,14 +56,35 @@ const LoginPage = ({ onLoginSuccess }) => {
     const normalUser = loginId.trim().toUpperCase();
     const normalPass = password.trim();
 
-    // Hardcoded mock credentials for demo
-    if ((normalUser === '727624BSC046' && normalPass === '30-04-2007') ||
-      (normalUser === '727624BSC011' && normalPass === '25-06-2007')) {
-      // Simulate "SUCCESS" response
+    const validUsers = {
+      '727624BSC046': {
+        password: '30-04-2007',
+        name: 'NAVEEN P',
+        photo: 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110805?v=0.9530980101260992'
+      },
+      '727624BSC011': {
+        password: '25-06-2007',
+        name: 'DHANUSH S',
+        photo: 'https://cms.nia.ac.in/CMSAPP/api/User/Account/Photo/110769?v=0.9480332412541949'
+      },
+      '727624BSC053': {
+        password: '10-02-2007',
+        name: 'DHIVAGAR V',
+        photo: 'https://coeerp.drmcet.ac.in/photos/727624BSC053.jpg'
+      },
+      '727624BSC031': {
+        password: '29-08-2006',
+        name: 'SWETHA A',
+        photo: 'https://coeerp.drmcet.ac.in/photos/727624BSC031.jpg'
+      }
+    };
+
+    const validUser = validUsers[normalUser];
+    if (validUser && normalPass === validUser.password) {
       onLoginSuccess({
-        name: normalUser === '727624BSC046' ? 'NAVEEN P' : 'DHANUSH S',
+        name: validUser.name,
         roll: normalUser,
-        photo: '' // Placeholder
+        photo: validUser.photo
       });
     } else {
       // Simulate failure response
