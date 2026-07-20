@@ -83,7 +83,7 @@ const Dashboard = ({ user, onLogout }) => {
         const naveenCourses = [
             { sem: '4', part: '3', code: '23MAT401', name: 'PROBABILITY AND STATISTICS', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
             { sem: '4', part: '3', code: '23SCI401', name: 'BASICS OF OPERATING SYSTEMS', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
-            { sem: '4', part: '3', code: '23SCT401', name: 'COMPUTER NETWORKS AND ATTACKS', credit: '3.00', result: 'PASS', grade: 'A', gp: '.00' },
+            { sem: '4', part: '3', code: '23SCT401', name: 'COMPUTER NETWORKS AND ATTACKS', credit: '3.00', result: 'PASS', grade: 'A', gp: '7.00' },
             { sem: '4', part: '3', code: '23SCT402', name: 'CRYPTOGRAPHY AND SECURITY', credit: '3.00', result: 'PASS', grade: 'B+', gp: '7.00' },
             { sem: '4', part: '3', code: '23SCL401', name: 'COMPUTER NETWORKS AND CYBER LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
             { sem: '4', part: '3', code: '23SCL402', name: 'CRYPTOGRAPHY AND SECURITY LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
