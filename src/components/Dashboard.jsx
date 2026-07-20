@@ -115,7 +115,7 @@ const Dashboard = ({ user, onLogout }) => {
                         <tbody>
                             {/* Common Headers for both */}
                             <tr style={{ height: '40px' }}>
-                                <th colSpan="9" style={{ backgroundColor: 'rgb(115,60,145)', color: 'white' }}>RESULTS OF THIRD SEMESTER : [2026 - EVEN SEMESTER - END SEMESTER]</th>
+                                <th colSpan="9" style={{ backgroundColor: 'rgb(115,60,145)', color: 'white' }}>RESULTS OF FOURTH SEMESTER : [2026 - EVEN SEMESTER - END SEMESTER]</th>
                             </tr>
                             <tr style={{ height: '30px' }}>
                                 <th>Sem</th><th>Part</th><th>Course Code</th><th>Name of the Course</th><th>Credit</th><th>Result</th><th>GR.</th><th>G.P.</th>
