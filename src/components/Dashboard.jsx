@@ -81,32 +81,20 @@ const Dashboard = ({ user, onLogout }) => {
         ];
 
         const naveenCourses = [
-            { sem: '3', part: '3', code: '23MAT305', name: 'DISCRETE MATHEMATICS', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
-            { sem: '3', part: '3', code: '23SCT301', name: 'COMPUTER ORGANIZATION AND ARCHITECTURE', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
-            { sem: '3', part: '3', code: '23SCT302', name: 'PRINCIPLES OF COMMUNICATION AND CYBER ATTACKS', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
-            { sem: '3', part: '3', code: '23SCI302', name: 'DATABASE DESIGN', credit: '4.00', result: 'PASS', grade: 'A', gp: '8.00' },
-            { sem: '3', part: '3', code: '23SCI301', name: 'OBJECT ORIENTED PROGRAMMING', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
-            { sem: '3', part: '3', code: '23SCL301', name: 'PROGRAMMING USING PYTHON LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
-            { sem: '3', part: '3', code: '23VAT301', name: 'UNIVERSAL HUMAN VALUES 2: UNDERSTANDING HARMONY', credit: '3.00', result: 'PASS', grade: 'A+', gp: '9.00' },
-            { sem: '3', part: '3', code: '23ESL301', name: 'PROFESSIONAL SKILLS-2: PROBLEM SOLVING SKILLS & LOGICAL THINKING 2', credit: '1.00', result: 'PASS', grade: 'B+', gp: '7.00' }
+            { sem: '4', part: '3', code: '23MAT401', name: 'PROBABILITY AND STATISTICS', credit: '4.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '4', part: '3', code: '23SCI401', name: 'BASICS OF OPERATING SYSTEMS', credit: '4.00', result: 'PASS', grade: 'B', gp: '6.00' },
+            { sem: '4', part: '3', code: '23SCT401', name: 'COMPUTER NETWORKS AND ATTACKS', credit: '3.00', result: 'PASS', grade: 'A', gp: '.00' },
+            { sem: '4', part: '3', code: '23SCT402', name: 'CRYPTOGRAPHY AND SECURITY', credit: '3.00', result: 'PASS', grade: 'B+', gp: '7.00' },
+            { sem: '4', part: '3', code: '23SCL401', name: 'COMPUTER NETWORKS AND CYBER LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
+            { sem: '4', part: '3', code: '23SCL402', name: 'CRYPTOGRAPHY AND SECURITY LABORATORY', credit: '2.00', result: 'PASS', grade: 'O', gp: '10.00' },
+            { sem: '4', part: '3', code: '23ESL401', name: 'PROFESSIONAL SKILLS 3: PROFESSIONAL DEVELOPMENT AND ETIQUETTE', credit: '1.00', result: 'PASS', grade: 'A', gp: '8.00' },
+            { sem: '4', part: '3', code: '23SAL401', name: 'STUDIO ACTIVITIES', credit: '0.00', result: 'PASS', grade: 'B', gp: '6.00' }
         ];
 
         const bsc053Courses = [...naveenCourses];
         const bsc031Courses = [...naveenCourses];
 
-        const bsc053Override = bsc053Courses.find(course => course.code === '23SCI301');
-        if (bsc053Override) {
-            bsc053Override.result = 'RE-APPEAR';
-            bsc053Override.grade = 'RA';
-            bsc053Override.gp = '';
-        }
 
-        const bsc031Override = bsc031Courses.find(course => course.code === '23SCT302');
-        if (bsc031Override) {
-            bsc031Override.result = 'RE-APPEAR';
-            bsc031Override.grade = 'RA';
-            bsc031Override.gp = '';
-        }
 
         const rows = user?.roll === '727624BSC011'
             ? navinCourses
@@ -149,12 +137,14 @@ const Dashboard = ({ user, onLogout }) => {
             modeOfReceipt: '', receiptNo: 'AUTO', receiptDate: new Date().toLocaleDateString('en-GB')
         });
         const [subjects, setSubjects] = useState([
-            { code: '23MAT305', name: 'DISCRETE MATHEMATICS', type: 0, credit: 4, fee: 350, selected: true },
-            { code: '23SCT301', name: 'COMPUTER ORGANIZATION AND ARCHITECTURE', type: 0, credit: 3, fee: 350, selected: true },
-            { code: '23SCT302', name: 'PRINCIPLES OF COMMUNICATION', type: 0, credit: 3, fee: 350, selected: true },
-            { code: '23SCI302', name: 'DATABASE DESIGN', type: 0, credit: 4, fee: 350, selected: true },
-            { code: '23SCI301', name: 'OBJECT ORIENTED PROGRAMMING', type: 0, credit: 4, fee: 350, selected: true },
-            { code: '23SCL301', name: 'PROGRAMMING USING PYTHON LAB', type: 1, credit: 2, fee: 500, selected: true },
+            { code: '23MAT401', name: 'PROBABILITY AND STATISTICS', type: 0, credit: 4, fee: 350, selected: true },
+            { code: '23SCI401', name: 'BASICS OF OPERATING SYSTEMS', type: 0, credit: 4, fee: 350, selected: true },
+            { code: '23SCT401', name: 'COMPUTER NETWORKS AND ATTACKS', type: 0, credit: 3, fee: 350, selected: true },
+            { code: '23SCT402', name: 'CRYPTOGRAPHY AND SECURITY', type: 0, credit: 3, fee: 350, selected: true },
+            { code: '23SCL401', name: 'COMPUTER NETWORKS AND CYBER LABORATORY', type: 1, credit: 2, fee: 500, selected: true },
+            { code: '23SCL402', name: 'CRYPTOGRAPHY AND SECURITY LABORATORY', type: 1, credit: 2, fee: 500, selected: true },
+            { code: '23ESL401', name: 'PROFESSIONAL SKILLS 3: PROFESSIONAL DEVELOPMENT AND ETIQUETTE', type: 0, credit: 1, fee: 350, selected: true },
+            { code: '23SAL401', name: 'STUDIO ACTIVITIES', type: 0, credit: 0, fee: 350, selected: true }
         ]);
         const [totals, setTotals] = useState({ theoryCount: 0, theoryAmount: 0, practicalCount: 0, practicalAmount: 0, grandTotal: 0 });
 
